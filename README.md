@@ -282,10 +282,6 @@ If this code is useful for your research, please cite the corresponding manuscri
 }
 ```
 
-## Contributors
-
-- Chandan Sheikder
-
 ## License
 
 No open-source license has been selected yet. Please add a license before making the repository public.
