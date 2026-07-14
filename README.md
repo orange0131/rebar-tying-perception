@@ -4,7 +4,7 @@ This repository contains the code used for the manuscript **"Task-Oriented RGB-D
 
 The project focuses on autonomous robotic rebar tying in structured construction scenes. The code in this repository covers the image-based rebar intersection state recognition part of the pipeline, including dataset preparation, model training, ablation experiments, result summarization, and Grad-CAM visualization.
 
-![Prediction examples](assets/final_prediction_collage.png)
+![Overview of the proposed task-oriented RGB-D perception and execution planning framework](assets/paper_framework_overview.png)
 
 ## Highlights
 
@@ -14,6 +14,22 @@ The project focuses on autonomous robotic rebar tying in structured construction
 - Training, evaluation, ROC/PR curves, confusion matrix, and summary table generation.
 - Grad-CAM visualization for model interpretability.
 - Interactive crop tool for preparing tied/untied intersection samples.
+
+## Paper Figures
+
+The complete manuscript framework integrates RGB-D rebar intersection perception, binding state recognition, robot-frame coordinate mapping, and task-constrained execution planning.
+
+![Task semantic recognition and perception-to-execution mapping](assets/paper_semantic_mapping.png)
+
+The recognition module classifies cropped intersection patches as tied or untied, filters tied intersections from the executable task set, and maps retained untied targets into the robot coordinate frame.
+
+![Grad-CAM comparison for binding state recognition](assets/paper_module_heatmaps.png)
+
+![Ground-truth labels and predicted probability heatmaps](assets/paper_probability_heatmaps.png)
+
+For execution planning, untied intersections are visited under grid-constrained path optimization.
+
+![Path planning comparison](assets/paper_path_planning.png)
 
 ## Repository Structure
 
@@ -159,10 +175,6 @@ python src/summarize_results.py \
   --save-dir results/runs_summary
 ```
 
-Example summary figure:
-
-![Accuracy comparison](results/runs_summary/compare_acc.png)
-
 ## Grad-CAM Visualization
 
 Generate Grad-CAM panels from a trained checkpoint:
@@ -186,6 +198,10 @@ The manuscript reports that the ConvNeXt-Tiny semantic recognition model enhance
 - Precision: 98.84%
 - F1-score: 98.28%
 
+Confusion matrices from the manuscript are included below for the baseline and ablation variants.
+
+![Confusion matrices for binding state recognition variants](assets/paper_confusion_matrices.png)
+
 The complete perception-to-execution framework also includes RGB-D target perception, robot-frame spatial mapping, and task-constrained execution planning. This repository currently focuses on the classification and visualization code used for the semantic recognition experiments.
 
 ## Notes for Submission
@@ -201,7 +217,7 @@ If this code is useful for your research, please cite the corresponding manuscri
 ```bibtex
 @article{ma2026rebarTying,
   title   = {Task-Oriented RGB-D Perception and Execution Planning Framework for Autonomous Robotic Rebar Tying},
-  author  = {Ma, Zhanguo and Fan, Shicheng and Yin, Zhiwei and He, Haotong and Liu, Pengyang and Yang, Guan},
+  author  = {Ma, Zhanguo and Fan, Shicheng and Sheikder, Chandan and Yin, Zhiwei and He, Haotong and Liu, Pengyang and Yang, Guan},
   year    = {2026},
   note    = {Manuscript}
 }
