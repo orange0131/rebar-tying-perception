@@ -1,44 +1,106 @@
-# Task-Oriented RGB-D Perception and Rebar-Tying State Recognition
+<h1 align="center">Task-Oriented RGB-D Perception and Rebar-Tying State Recognition</h1>
+
+<p align="center">
+  Code companion for <br>
+  <strong>Task-Oriented RGB-D Perception and Execution Planning Framework for Autonomous Robotic Rebar Tying</strong>
+</p>
+
+<p align="center">
+  Python | PyTorch | ConvNeXt-Tiny | CBAM | GeM | Grad-CAM
+</p>
+
+<p align="center">
+  <img src="assets/paper_framework_overview.png" alt="Overview of the proposed task-oriented RGB-D perception and execution planning framework" width="100%">
+</p>
+
+## Overview
 
 This repository contains the code used for the manuscript **"Task-Oriented RGB-D Perception and Execution Planning Framework for Autonomous Robotic Rebar Tying"**.
 
-The project focuses on autonomous robotic rebar tying in structured construction scenes. The code in this repository covers the image-based rebar intersection state recognition part of the pipeline, including dataset preparation, model training, ablation experiments, result summarization, and Grad-CAM visualization.
+The complete framework connects RGB-D rebar intersection perception, tied/untied state recognition, robot-frame coordinate mapping, and grid-constrained execution planning. This repository focuses on the image-based semantic recognition experiments and related visualization tools.
 
-![Overview of the proposed task-oriented RGB-D perception and execution planning framework](assets/paper_framework_overview.png)
+| Item | Description |
+| --- | --- |
+| Task | Classify rebar intersections as tied or untied |
+| Core model | ConvNeXt-Tiny enhanced with CBAM attention and GeM pooling |
+| Utilities | Dataset splitting, interactive cropping, training, evaluation, result summary, Grad-CAM |
+| Included data | Small demo images and manuscript figures |
+| Excluded data | Full raw dataset, trained checkpoints, virtual environments, and heavy run outputs |
 
-## Highlights
+## Contents
 
-- ConvNeXt-Tiny based tied/untied rebar intersection classifier.
-- CBAM attention and GeM pooling variants for ablation studies.
-- Baseline models including ResNet-18, EfficientNet-B0, DenseNet-121, MobileNetV3-Small, and ConvNeXt-Tiny.
-- Training, evaluation, ROC/PR curves, confusion matrix, and summary table generation.
-- Grad-CAM visualization for model interpretability.
-- Interactive crop tool for preparing tied/untied intersection samples.
+- [Paper Figures](#paper-figures)
+- [Key Results](#key-results)
+- [Repository Structure](#repository-structure)
+- [Installation](#installation)
+- [Data Layout](#data-layout)
+- [Interactive Cropping](#interactive-cropping)
+- [Training](#training)
+- [Evaluation and Visualization](#evaluation-and-visualization)
+- [Notes for Submission](#notes-for-submission)
+- [Citation](#citation)
 
 ## Paper Figures
 
-The complete manuscript framework integrates RGB-D rebar intersection perception, binding state recognition, robot-frame coordinate mapping, and task-constrained execution planning.
-
-![Task semantic recognition and perception-to-execution mapping](assets/paper_semantic_mapping.png)
+### Semantic Recognition and Mapping
 
 The recognition module classifies cropped intersection patches as tied or untied, filters tied intersections from the executable task set, and maps retained untied targets into the robot coordinate frame.
 
-![Grad-CAM comparison for binding state recognition](assets/paper_module_heatmaps.png)
+<p align="center">
+  <img src="assets/paper_semantic_mapping.png" alt="Task semantic recognition and perception-to-execution mapping" width="100%">
+</p>
 
-![Ground-truth labels and predicted probability heatmaps](assets/paper_probability_heatmaps.png)
+### Recognition Interpretability
 
-For execution planning, untied intersections are visited under grid-constrained path optimization.
+Grad-CAM and probability heatmaps show how CBAM and GeM improve attention localization and prediction confidence for fine-grained tied/untied recognition.
 
-![Path planning comparison](assets/paper_path_planning.png)
+<table>
+  <tr>
+    <td width="50%">
+      <img src="assets/paper_module_heatmaps.png" alt="Grad-CAM comparison for binding state recognition">
+    </td>
+    <td width="50%">
+      <img src="assets/paper_probability_heatmaps.png" alt="Ground-truth labels and predicted probability heatmaps">
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Grad-CAM comparison</strong></td>
+    <td align="center"><strong>Prediction probability heatmaps</strong></td>
+  </tr>
+</table>
+
+### Execution Planning
+
+Untied intersections are retained as executable task nodes and visited using grid-constrained path optimization.
+
+<p align="center">
+  <img src="assets/paper_path_planning.png" alt="Path planning comparison" width="100%">
+</p>
+
+## Key Results
+
+The manuscript reports the following performance for the ConvNeXt-Tiny model enhanced with CBAM attention and GeM pooling:
+
+| Metric | Value |
+| --- | ---: |
+| Accuracy | 98.24% |
+| Precision | 98.84% |
+| F1-score | 98.28% |
+
+Confusion matrices for the baseline and ablation variants are shown below.
+
+<p align="center">
+  <img src="assets/paper_confusion_matrices.png" alt="Confusion matrices for binding state recognition variants" width="70%">
+</p>
 
 ## Repository Structure
 
 ```text
 .
-├── assets/                  # Lightweight figures for the README
+├── assets/                  # Manuscript figures and lightweight README images
 ├── data/                    # Local data placeholder; full dataset is not tracked
 ├── examples/                # Small demo inputs
-├── results/                 # Lightweight paper/result figures
+├── results/                 # Lightweight result figures and tables
 ├── src/
 │   ├── dataset_utils.py      # Training, evaluation, metrics, and plotting utilities
 │   ├── model_ablation.py     # ConvNeXt + CBAM/GeM model components
@@ -49,8 +111,6 @@ For execution planning, untied intersections are visited under grid-constrained 
 │   └── ...
 └── requirements.txt
 ```
-
-Large training artifacts, raw image datasets, virtual environments, and model weights are intentionally excluded from Git.
 
 ## Installation
 
@@ -89,7 +149,7 @@ data/rebar_crops/
 └── untied/
 ```
 
-Then split them into train/validation/test sets:
+Then split them into train, validation, and test sets:
 
 ```bash
 python src/split_dataset.py \
@@ -101,7 +161,7 @@ python src/split_dataset.py \
 
 ## Interactive Cropping
 
-The interactive crop tool can be used to extract tied and untied rebar intersections from raw images:
+The interactive crop tool extracts tied and untied rebar intersection patches from raw images:
 
 ```bash
 python src/main.py \
@@ -113,16 +173,18 @@ python src/main.py \
 
 Controls:
 
-- Drag a box around an intersection.
-- Press `t` to save as tied.
-- Press `u` to save as untied.
-- Press `n` / `p` to move to the next/previous image.
-- Press `z` to undo the last displayed annotation.
-- Press `q` or `Esc` to quit.
+| Key | Action |
+| --- | --- |
+| Drag | Select an intersection patch |
+| `t` | Save as tied |
+| `u` | Save as untied |
+| `n` / `p` | Next / previous image |
+| `z` | Undo the last displayed annotation |
+| `q` or `Esc` | Quit |
 
 ## Training
 
-The recommended training entry point is `src/train_experiment.py`.
+The recommended entry point is `src/train_experiment.py`.
 
 Train the proposed ConvNeXt + CBAM + GeM model:
 
@@ -153,29 +215,27 @@ python src/train_experiment.py --model convnext_gem --data-dir data/rebar_datase
 python src/train_experiment.py --model convnext_cbam_gem_head --data-dir data/rebar_dataset --output-dir runs/convnext_cbam_gem_head
 ```
 
-Each run writes metrics and figures to the selected output directory, including:
+Each run writes metrics and figures to the selected output directory:
 
-- `best_model.pth`
-- `history.csv`
-- `result.json`
-- `loss_curve.png`
-- `acc_curve.png`
-- `confusion_matrix.png`
-- `roc_curve.png`
-- `pr_curve.png`
-- `classification_report.txt`
+| Output | Purpose |
+| --- | --- |
+| `best_model.pth` | Best validation checkpoint |
+| `history.csv` | Epoch-level training history |
+| `result.json` | Test metrics |
+| `loss_curve.png`, `acc_curve.png` | Training curves |
+| `confusion_matrix.png` | Test confusion matrix |
+| `roc_curve.png`, `pr_curve.png` | ROC and precision-recall curves |
+| `classification_report.txt` | Class-level report |
 
-## Result Summary
+## Evaluation and Visualization
 
-After training multiple models, summarize results with:
+Summarize multiple trained models:
 
 ```bash
 python src/summarize_results.py \
   --runs-dir runs \
   --save-dir results/runs_summary
 ```
-
-## Grad-CAM Visualization
 
 Generate Grad-CAM panels from a trained checkpoint:
 
@@ -188,27 +248,13 @@ python src/gradcam_batch_visualize_final.py \
   --use-gem
 ```
 
-The script exports the original image, heatmap, overlay, thresholded mask, contour visualization, and a combined panel for each input image.
-
-## Reported Manuscript Results
-
-The manuscript reports that the ConvNeXt-Tiny semantic recognition model enhanced with CBAM attention and GeM pooling achieved:
-
-- Accuracy: 98.24%
-- Precision: 98.84%
-- F1-score: 98.28%
-
-Confusion matrices from the manuscript are included below for the baseline and ablation variants.
-
-![Confusion matrices for binding state recognition variants](assets/paper_confusion_matrices.png)
-
-The complete perception-to-execution framework also includes RGB-D target perception, robot-frame spatial mapping, and task-constrained execution planning. This repository currently focuses on the classification and visualization code used for the semantic recognition experiments.
+The Grad-CAM script exports the original image, heatmap, overlay, thresholded mask, contour visualization, and a combined panel for each input image.
 
 ## Notes for Submission
 
-- Keep the GitHub repository private while the manuscript is under review if the target journal has anonymity or prior-publication constraints.
+- Keep the repository private while the manuscript is under review if the target journal has anonymity or prior-publication constraints.
 - Do not upload raw field images, full datasets, trained `.pth` checkpoints, or reviewer-sensitive files unless the journal explicitly requires public availability.
-- If the code must be made public later, add a dataset access statement and a license before release.
+- Add a dataset access statement and a license before making the repository public.
 
 ## Citation
 
