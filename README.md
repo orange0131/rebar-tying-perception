@@ -12,11 +12,6 @@
   <img src="https://img.shields.io/badge/License-Pending-yellow?style=for-the-badge" alt="License">
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Robotic_rebar_tying-e0f2fe?style=flat" alt="Robotic rebar tying">
-  <img src="https://img.shields.io/badge/RGB--D_perception-e0f2fe?style=flat" alt="RGB-D perception">
-  <img src="https://img.shields.io/badge/Perception--to--execution_framework-e0f2fe?style=flat" alt="Perception-to-execution framework">
-</p>
 
 <p align="center">
   ConvNeXt-Tiny | CBAM | GeM | Grad-CAM
