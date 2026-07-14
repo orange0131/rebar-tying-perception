@@ -6,7 +6,20 @@
 </p>
 
 <p align="center">
-  Python | PyTorch | ConvNeXt-Tiny | CBAM | GeM | Grad-CAM
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-Tested-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/github/actions/workflow/status/orange0131/rebar-tying-perception/python-app.yml?style=for-the-badge" alt="Build Status">
+  <img src="https://img.shields.io/badge/License-Pending-yellow?style=for-the-badge" alt="License">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Robotic_rebar_tying-e0f2fe?style=flat" alt="Robotic rebar tying">
+  <img src="https://img.shields.io/badge/RGB--D_perception-e0f2fe?style=flat" alt="RGB-D perception">
+  <img src="https://img.shields.io/badge/Perception--to--execution_framework-e0f2fe?style=flat" alt="Perception-to-execution framework">
+</p>
+
+<p align="center">
+  ConvNeXt-Tiny | CBAM | GeM | Grad-CAM
 </p>
 
 <p align="center">
