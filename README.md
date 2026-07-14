@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/PyTorch-Tested-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
   <img src="https://img.shields.io/github/actions/workflow/status/orange0131/rebar-tying-perception/python-app.yml?style=for-the-badge" alt="Build Status">
-  <img src="https://img.shields.io/badge/License-Pending-yellow?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License">
 </p>
 
 
@@ -258,12 +258,6 @@ python src/gradcam_batch_visualize_final.py \
 
 The Grad-CAM script exports the original image, heatmap, overlay, thresholded mask, contour visualization, and a combined panel for each input image.
 
-## Notes for Submission
-
-- Keep the repository private while the manuscript is under review if the target journal has anonymity or prior-publication constraints.
-- Do not upload raw field images, full datasets, trained `.pth` checkpoints, or reviewer-sensitive files unless the journal explicitly requires public availability.
-- Add a dataset access statement and a license before making the repository public.
-
 ## Citation
 
 If this code is useful for your research, please cite the corresponding manuscript:
@@ -279,4 +273,4 @@ If this code is useful for your research, please cite the corresponding manuscri
 
 ## License
 
-No open-source license has been selected yet. Please add a license before making the repository public.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
