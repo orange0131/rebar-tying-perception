@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Local datasets
+data/*
+!data/README.md
+
+# Training outputs and checkpoints
+runs/
+shiyan1/
+outputs/
+outputs_*/
+gradcam_outputs/
+compare_probs/
+*.pth
+*.pt
+*.ckpt
+
+# Large/raw image folders from local experiments
+/images/
+/rebar_dataset*/
+/rebar_crops*/
+/relituceshi/
+/test_images/
+/test_samples/
+
+# Logs
+*.log
+wandb/
